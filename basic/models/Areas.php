@@ -16,7 +16,7 @@ use Yii;
  * @property EarthType[] $earthTypes
  * @property Estates[] $estates
  */
-class areas extends \yii\db\ActiveRecord
+class Areas extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
