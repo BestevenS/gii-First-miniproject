@@ -281,10 +281,3 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*
-
-  UPDATE `payments` 
-  INNER JOIN `billing_type` ON `payments`.`billing_id` = `billing_type`.`id` 
-  SET `payments`.`price` = `billing_type`.`price`;
-
-*/
