@@ -17,7 +17,7 @@ class earthtypeSearch extends earthtype
     public function rules()
     {
         return [
-            [['id', 'area_id', 'billing_type_id'], 'integer'],
+            [['id', 'billing_type_id'], 'integer'],
             [['name', 'notes', 'billing_type'], 'safe'],
         ];
     }
@@ -59,7 +59,6 @@ class earthtypeSearch extends earthtype
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'area_id' => $this->area_id,
             'billing_type_id' => $this->billing_type_id,
         ]);
 

@@ -13,7 +13,6 @@ use Yii;
  * @property int $state
  *
  * @property BillingType[] $billingTypes
- * @property EarthType[] $earthTypes
  * @property Estates[] $estates
  */
 class Areas extends \yii\db\ActiveRecord
@@ -59,16 +58,6 @@ class Areas extends \yii\db\ActiveRecord
     public function getBillingTypes()
     {
         return $this->hasMany(BillingType::class, ['area_id' => 'id']);
-    }
-
-    /**
-     * Gets query for [[EarthTypes]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getEarthTypes()
-    {
-        return $this->hasMany(EarthType::class, ['area_id' => 'id']);
     }
 
     /**

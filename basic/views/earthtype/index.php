@@ -30,11 +30,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'area_id',
             'billing_type_id',
             'name',
             'notes:ntext',
-            //'billing_type',
+            'billing_type',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, earthtype $model, $key, $index, $column) {

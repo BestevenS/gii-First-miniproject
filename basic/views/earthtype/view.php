@@ -30,7 +30,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'area_id',
             'billing_type_id',
             'name',
             'notes:ntext',
