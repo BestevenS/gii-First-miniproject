@@ -31,8 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'name',
             'notes:ntext',
-            'price',
             'state',
+            'price',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, billingtype $model, $key, $index, $column) {
