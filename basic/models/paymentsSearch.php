@@ -17,7 +17,7 @@ class paymentsSearch extends payments
     public function rules()
     {
         return [
-            [['payment_no', 'customer_id', 'billing_id'], 'integer'],
+            [['payment_no', 'customer_id', 'billing_type_id'], 'integer'],
             [['price'], 'number'],
             [['type', 'date'], 'safe'],
         ];
@@ -62,7 +62,7 @@ class paymentsSearch extends payments
             'payment_no' => $this->payment_no,
             'customer_id' => $this->customer_id,
             'price' => $this->price,
-            'billing_id' => $this->billing_id,
+            'billing_type_id' => $this->billing_type_id,
             'date' => $this->date,
         ]);
 

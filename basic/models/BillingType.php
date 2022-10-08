@@ -15,6 +15,7 @@ use Yii;
  * @property float|null $price
  *
  * @property Areas $area
+ * @property Billings[] $billings
  * @property EarthType[] $earthTypes
  * @property Payments[] $payments
  */
@@ -69,6 +70,16 @@ class BillingType extends \yii\db\ActiveRecord
     }
 
     /**
+     * Gets query for [[Billings]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBillings()
+    {
+        return $this->hasMany(Billings::class, ['billing_type_id' => 'id']);
+    }
+
+    /**
      * Gets query for [[EarthTypes]].
      *
      * @return \yii\db\ActiveQuery
@@ -85,6 +96,6 @@ class BillingType extends \yii\db\ActiveRecord
      */
     public function getPayments()
     {
-        return $this->hasMany(Payments::class, ['billing_id' => 'id']);
+        return $this->hasMany(Payments::class, ['billing_type_id' => 'id']);
     }
 }

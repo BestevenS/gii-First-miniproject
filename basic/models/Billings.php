@@ -5,27 +5,26 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "payments".
+ * This is the model class for table "billings".
  *
- * @property int $payment_no
+ * @property int $id
  * @property int|null $customer_id
- * @property float|null $price
  * @property int|null $billing_type_id
- * @property string|null $type
- * @property string|null $date
+ * @property int|null $payment_id
+ * @property int|null $paid
  *
  * @property BillingType $billingType
- * @property Billings[] $billings
  * @property Customers $customer
+ * @property Payments $payment
  */
-class Payments extends \yii\db\ActiveRecord
+class Billings extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'payments';
+        return 'billings';
     }
 
     /**
@@ -34,12 +33,10 @@ class Payments extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['customer_id', 'billing_type_id'], 'integer'],
-            [['price'], 'number'],
-            [['date'], 'safe'],
-            [['type'], 'string', 'max' => 20],
+            [['customer_id', 'billing_type_id', 'payment_id', 'paid'], 'integer'],
             [['customer_id'], 'exist', 'skipOnError' => true, 'targetClass' => Customers::class, 'targetAttribute' => ['customer_id' => 'id']],
             [['billing_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => BillingType::class, 'targetAttribute' => ['billing_type_id' => 'id']],
+            [['payment_id'], 'exist', 'skipOnError' => true, 'targetClass' => Payments::class, 'targetAttribute' => ['payment_id' => 'payment_no']],
         ];
     }
 
@@ -49,12 +46,11 @@ class Payments extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'payment_no' => 'Payment No',
+            'id' => 'ID',
             'customer_id' => 'Customer ID',
-            'price' => 'Price',
             'billing_type_id' => 'Billing Type ID',
-            'type' => 'Type',
-            'date' => 'Date',
+            'payment_id' => 'Payment ID',
+            'paid' => 'Paid',
         ];
     }
 
@@ -69,16 +65,6 @@ class Payments extends \yii\db\ActiveRecord
     }
 
     /**
-     * Gets query for [[Billings]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getBillings()
-    {
-        return $this->hasMany(Billings::class, ['payment_id' => 'payment_no']);
-    }
-
-    /**
      * Gets query for [[Customer]].
      *
      * @return \yii\db\ActiveQuery
@@ -86,5 +72,15 @@ class Payments extends \yii\db\ActiveRecord
     public function getCustomer()
     {
         return $this->hasOne(Customers::class, ['id' => 'customer_id']);
+    }
+
+    /**
+     * Gets query for [[Payment]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getPayment()
+    {
+        return $this->hasOne(Payments::class, ['payment_no' => 'payment_id']);
     }
 }

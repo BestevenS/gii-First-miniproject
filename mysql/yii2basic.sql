@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 29, 2022 at 02:36 PM
+-- Generation Time: Oct 08, 2022 at 12:13 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -46,6 +46,27 @@ INSERT INTO `areas` (`id`, `name`, `notes`, `state`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `billings`
+--
+
+CREATE TABLE `billings` (
+  `id` int(11) NOT NULL,
+  `customer_id` int(11) DEFAULT NULL,
+  `billing_type_id` int(11) DEFAULT NULL,
+  `payment_id` int(11) DEFAULT NULL,
+  `paid` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `billings`
+--
+
+INSERT INTO `billings` (`id`, `customer_id`, `billing_type_id`, `payment_id`, `paid`) VALUES
+(1, 1, 1, 1, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `billing_type`
 --
 
@@ -65,7 +86,7 @@ CREATE TABLE `billing_type` (
 INSERT INTO `billing_type` (`id`, `area_id`, `name`, `notes`, `state`, `price`) VALUES
 (1, 2, 'name of billing type', 'notes of billing type', 0, 220000),
 (2, 1, 'name of Billint_type 2', 'notes of billing type 2', 0, 330000),
-(3, 3, 'billing type name 3', 'billing type notes 3', 0, 220000);
+(3, 3, 'billing type name 3', 'billing type notes 3', 1, 220000);
 
 -- --------------------------------------------------------
 
@@ -75,8 +96,8 @@ INSERT INTO `billing_type` (`id`, `area_id`, `name`, `notes`, `state`, `price`) 
 
 CREATE TABLE `customers` (
   `id` int(11) NOT NULL,
-  `fname` varchar(255) DEFAULT NULL,
-  `lname` varchar(255) DEFAULT NULL,
+  `firstname` varchar(255) DEFAULT NULL,
+  `lastname` varchar(255) DEFAULT NULL,
   `afm` varchar(20) DEFAULT NULL,
   `doy` varchar(20) DEFAULT NULL,
   `address` varchar(255) DEFAULT NULL,
@@ -89,7 +110,7 @@ CREATE TABLE `customers` (
 -- Dumping data for table `customers`
 --
 
-INSERT INTO `customers` (`id`, `fname`, `lname`, `afm`, `doy`, `address`, `phone`, `at`, `protocol_no`) VALUES
+INSERT INTO `customers` (`id`, `firstname`, `lastname`, `afm`, `doy`, `address`, `phone`, `at`, `protocol_no`) VALUES
 (1, 'John', 'Blabla', '123154', '123455', 'Address1 33', '+302244052336', 'ai123455', '987654'),
 (2, 'Jack', 'Rapapa', '4564413', '213345', 'Address2', '+44205589654', 'am469731', '1531454');
 
@@ -103,17 +124,16 @@ CREATE TABLE `earth_type` (
   `id` int(11) NOT NULL,
   `billing_type_id` int(11) NOT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `notes` text NOT NULL,
-  `billing_type` varchar(50) DEFAULT NULL
+  `notes` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `earth_type`
 --
 
-INSERT INTO `earth_type` (`id`, `billing_type_id`, `name`, `notes`, `billing_type`) VALUES
-(1, 1, 'earth type name 1', 'earth type notes 1', 'name of billing type'),
-(2, 3, 'earth type name 1', 'earth type notes 1', 'name of Billint_type 2');
+INSERT INTO `earth_type` (`id`, `billing_type_id`, `name`, `notes`) VALUES
+(1, 1, 'earth type name 1', 'earth type notes 1'),
+(2, 3, 'earth type name 1', 'earth type notes 1');
 
 -- --------------------------------------------------------
 
@@ -148,7 +168,7 @@ CREATE TABLE `payments` (
   `payment_no` int(11) NOT NULL,
   `customer_id` int(11) DEFAULT NULL,
   `price` float DEFAULT NULL,
-  `billing_id` int(11) DEFAULT NULL,
+  `billing_type_id` int(11) DEFAULT NULL,
   `type` varchar(20) DEFAULT NULL,
   `date` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -157,9 +177,9 @@ CREATE TABLE `payments` (
 -- Dumping data for table `payments`
 --
 
-INSERT INTO `payments` (`payment_no`, `customer_id`, `price`, `billing_id`, `type`, `date`) VALUES
-(1, 1, 220000, 1, 'payment 1 type', '2021-09-15'),
-(2, 2, 330000, 2, 'payment 2 type', '2021-09-10');
+INSERT INTO `payments` (`payment_no`, `customer_id`, `price`, `billing_type_id`, `type`, `date`) VALUES
+(1, 1, 220000, 1, 'old', '2021-09-15'),
+(2, 2, 330000, 2, 'current use', '2021-09-10');
 
 --
 -- Indexes for dumped tables
@@ -170,6 +190,15 @@ INSERT INTO `payments` (`payment_no`, `customer_id`, `price`, `billing_id`, `typ
 --
 ALTER TABLE `areas`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `billings`
+--
+ALTER TABLE `billings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `customer_id` (`customer_id`),
+  ADD KEY `billing_type_id` (`billing_type_id`),
+  ADD KEY `payment_id` (`payment_id`);
 
 --
 -- Indexes for table `billing_type`
@@ -205,7 +234,7 @@ ALTER TABLE `estates`
 ALTER TABLE `payments`
   ADD PRIMARY KEY (`payment_no`),
   ADD KEY `payments_ibfk_1` (`customer_id`),
-  ADD KEY `payments_ibfk_2` (`billing_id`);
+  ADD KEY `payments_ibfk_2` (`billing_type_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -216,6 +245,12 @@ ALTER TABLE `payments`
 --
 ALTER TABLE `areas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `billings`
+--
+ALTER TABLE `billings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `billing_type`
@@ -252,6 +287,14 @@ ALTER TABLE `payments`
 --
 
 --
+-- Constraints for table `billings`
+--
+ALTER TABLE `billings`
+  ADD CONSTRAINT `billings_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
+  ADD CONSTRAINT `billings_ibfk_2` FOREIGN KEY (`billing_type_id`) REFERENCES `billing_type` (`id`),
+  ADD CONSTRAINT `billings_ibfk_3` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`payment_no`);
+
+--
 -- Constraints for table `billing_type`
 --
 ALTER TABLE `billing_type`
@@ -275,7 +318,7 @@ ALTER TABLE `estates`
 --
 ALTER TABLE `payments`
   ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customers` (`id`),
-  ADD CONSTRAINT `payments_ibfk_2` FOREIGN KEY (`billing_id`) REFERENCES `billing_type` (`id`);
+  ADD CONSTRAINT `payments_ibfk_2` FOREIGN KEY (`billing_type_id`) REFERENCES `billing_type` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

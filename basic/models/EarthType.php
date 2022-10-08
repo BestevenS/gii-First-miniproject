@@ -11,7 +11,6 @@ use Yii;
  * @property int $billing_type_id
  * @property string|null $name
  * @property string $notes
- * @property string|null $billing_type
  *
  * @property BillingType $billingType
  */
@@ -35,7 +34,6 @@ class EarthType extends \yii\db\ActiveRecord
             [['billing_type_id'], 'integer'],
             [['notes'], 'string'],
             [['name'], 'string', 'max' => 255],
-            [['billing_type'], 'string', 'max' => 50],
             [['billing_type_id'], 'exist', 'skipOnError' => true, 'targetClass' => BillingType::class, 'targetAttribute' => ['billing_type_id' => 'id']],
         ];
     }
@@ -50,7 +48,6 @@ class EarthType extends \yii\db\ActiveRecord
             'billing_type_id' => 'Billing Type ID',
             'name' => 'Name',
             'notes' => 'Notes',
-            'billing_type' => 'Billing Type',
         ];
     }
 

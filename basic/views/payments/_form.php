@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'price')->textInput() ?>
 
-    <?= $form->field($model, 'billing_id')->textInput() ?>
+    <?= $form->field($model, 'billing_type_id')->textInput() ?>
 
     <?= $form->field($model, 'type')->textInput(['maxlength' => true]) ?>
 

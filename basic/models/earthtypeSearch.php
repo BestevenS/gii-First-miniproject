@@ -18,7 +18,7 @@ class earthtypeSearch extends earthtype
     {
         return [
             [['id', 'billing_type_id'], 'integer'],
-            [['name', 'notes', 'billing_type'], 'safe'],
+            [['name', 'notes'], 'safe'],
         ];
     }
 
@@ -63,8 +63,7 @@ class earthtypeSearch extends earthtype
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'notes', $this->notes])
-            ->andFilterWhere(['like', 'billing_type', $this->billing_type]);
+            ->andFilterWhere(['like', 'notes', $this->notes]);
 
         return $dataProvider;
     }

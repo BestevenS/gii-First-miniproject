@@ -1,24 +1,24 @@
 <?php
 
-use app\models\customers;
+use app\models\billings;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
-/** @var app\models\customersSearch $searchModel */
+/** @var app\models\billingsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Customers';
+$this->title = 'Billings';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="customers-index">
+<div class="billings-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Customers', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Billings', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,17 +29,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'firstname',
-            'lastname',
-            'afm',
-            'doy',
-            'address',
-            'phone',
-            'at',
-            'protocol_no',
+            'id',
+            'customer_id',
+            'billing_type_id',
+            'payment_id',
+            'paid',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, customers $model, $key, $index, $column) {
+                'urlCreator' => function ($action, billings $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

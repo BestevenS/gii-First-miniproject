@@ -8,8 +8,8 @@ use Yii;
  * This is the model class for table "customers".
  *
  * @property int $id
- * @property string|null $fname
- * @property string|null $lname
+ * @property string|null $firstname
+ * @property string|null $lastname
  * @property string|null $afm
  * @property string|null $doy
  * @property string|null $address
@@ -17,6 +17,7 @@ use Yii;
  * @property string|null $at
  * @property string|null $protocol_no
  *
+ * @property Billings[] $billings
  * @property Estates[] $estates
  * @property Payments[] $payments
  */
@@ -36,7 +37,7 @@ class Customers extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fname', 'lname', 'address'], 'string', 'max' => 255],
+            [['firstname', 'lastname', 'address'], 'string', 'max' => 255],
             [['afm', 'doy'], 'string', 'max' => 20],
             [['phone'], 'string', 'max' => 15],
             [['at'], 'string', 'max' => 10],
@@ -51,8 +52,8 @@ class Customers extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'fname' => 'Fname',
-            'lname' => 'Lname',
+            'firstname' => 'Firstname',
+            'lastname' => 'Lastname',
             'afm' => 'Afm',
             'doy' => 'Doy',
             'address' => 'Address',
@@ -60,6 +61,16 @@ class Customers extends \yii\db\ActiveRecord
             'at' => 'At',
             'protocol_no' => 'Protocol No',
         ];
+    }
+
+    /**
+     * Gets query for [[Billings]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getBillings()
+    {
+        return $this->hasMany(Billings::class, ['customer_id' => 'id']);
     }
 
     /**

@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'price') ?>
 
-    <?= $form->field($model, 'billing_id') ?>
+    <?= $form->field($model, 'billing_type_id') ?>
 
     <?= $form->field($model, 'type') ?>
 
