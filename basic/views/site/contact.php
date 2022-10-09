@@ -9,7 +9,7 @@ use yii\bootstrap5\Html;
 use yii\captcha\Captcha;
 
 $this->title = 'Contact';
-$this->params['breadcrumbs'][] = $this->title;
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-contact">
     <h1><?= Html::encode($this->title) ?></h1>
@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
 
         <p>
-            Note that if you turn on the Yii debugger, you should be able
+            Note that if you turn on the Yii debugger, you should be `ab`le
             to view the mail message on the mail panel of the debugger.
             <?php if (Yii::$app->mailer->useFileTransport): ?>
                 Because the application is in development mode, the email is not sent but saved as

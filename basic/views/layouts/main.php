@@ -39,9 +39,28 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            // ['label' => 'The Right Click', 'url' => ['/site/index']],
+            ['label' => 'Πελάτες', 'url' => ['/customers']],
+
+            [
+                'label' => 'Εκτάσεις',
+                'items' => [
+                    ['label' => 'Περιοχές', 'url' => ['/areas']],
+                    ['label' => 'Κτήματα', 'url' => ['/estates']],
+                    ['label' => 'Τύποι γης', 'url' => ['/earthtype']],
+                ],
+            ],
+
+            [
+                'label' => 'Πληρωμές & Χρεώσεις',
+                'items' => [
+                    ['label' => 'Πληρωμές', 'url' => ['/payments']],
+                    ['label' => 'Χρεώσεις', 'url' => ['/billings']],
+                    ['label' => 'Τύποι χρεώσεων', 'url' => ['/billingtype']],
+                ],
+            ],
+            ['label' => 'Επικοινωνία', 'url' => ['/site/about']],
+            ['label' => 'Επικοινωνία', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
@@ -71,7 +90,12 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
 <footer id="footer" class="mt-auto py-3 bg-light">
     <div class="container">
         <div class="row text-muted">
-            <div class="col-md-6 text-center text-md-start">&copy; My Company <?= date('Y') ?></div>
+            <div class="col-md-6 text-center text-md-start">&copy; Επικοινωνία
+                <?php 
+                    // echo Nav::widget(['label' => 'Επικοινωνία', 'url' => ['/site/contact']]); 
+                    // NavBar::end(); 
+                ?>
+            </div>
             <div class="col-md-6 text-center text-md-end"><?= Yii::powered() ?></div>
         </div>
     </div>
