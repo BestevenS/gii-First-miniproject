@@ -43,7 +43,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
             ['label' => 'Πελάτες', 'url' => ['/customers']],
 
             [
-                'label' => 'Εκτάσεις',
+                'label' => 'Περιοχές & Κτήματα',
                 'items' => [
                     ['label' => 'Περιοχές', 'url' => ['/areas']],
                     ['label' => 'Κτήματα', 'url' => ['/estates']],
@@ -59,7 +59,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
                     ['label' => 'Τύποι χρεώσεων', 'url' => ['/billingtype']],
                 ],
             ],
-            ['label' => 'Επικοινωνία', 'url' => ['/site/about']],
+            ['label' => 'Σχετικά με εμάς', 'url' => ['/site/about']],
             ['label' => 'Επικοινωνία', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
